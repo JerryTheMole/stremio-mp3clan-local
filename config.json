@@ -1,0 +1,8 @@
+{
+	"host": {
+		"title": "MP3 Clan Host",
+		"type": "string",
+		"default": "http://mp3guild.com",
+		"required": true
+	}
+}
