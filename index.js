@@ -26,14 +26,14 @@ const builder = new addonBuilder({
 	name: defaults.name,
 	description: 'Search and play music from MP3 Clan / MP3 Guild websites',
 	resources: ['stream', 'meta', 'catalog'],
-	types: ['tv'],
+	types: ['music', 'tv'],
 	idPrefixes: [defaults.prefix],
 	icon: defaults.icon.replace(defaults.host, host),
 	catalogs: [
 		{
 			id: defaults.prefix + 'cat',
 			name: 'MP3 Clan',
-			type: 'tv',
+			type: 'music',
 			extra: [{ name: 'search', isRequired: true }]
 		}
 	]
@@ -67,7 +67,7 @@ builder.defineCatalogHandler(args => {
 builder.defineMetaHandler(args => {
 	return new Promise((resolve, reject) => {
         const parts = args.id.replace(defaults.prefix, '').split(':mp3title:')
-        resolve({ meta: { id: args.id, name: decodeURIComponent(parts[1].split(':mp3query:')[0]) } })
+        resolve({ meta: { id: args.id, name: decodeURIComponent(parts[1].split(':mp3query:')[0]), type: 'tv' } })
 	})
 })
 
