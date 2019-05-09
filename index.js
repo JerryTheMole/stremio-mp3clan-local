@@ -43,7 +43,6 @@ builder.defineCatalogHandler(args => {
 	return new Promise((resolve, reject) => {
 		const extra = args.extra || {}
         needle.post(host + '/mp3_source.php', 'ser='+encodeURIComponent(extra.search)+'&page=0', { headers: { referer: host + '/mp3/' + encodeURIComponent(extra.search) + '.html' } }, (err,resp,body) => {
-        	console.log(typeof body)
             if (!err && body) {
             	const $ = cheerio.load(body)
                 const results = []
