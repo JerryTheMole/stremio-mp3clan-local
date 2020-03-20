@@ -75,13 +75,7 @@ builder.defineStreamHandler(args => {
         const parts = args.id.replace('mp3clan_id:', '').split(':mp3title:')
         const query = parts[1].split(':mp3query:')[1]
         const referer = host + '/mp3/' + query + '.html'
-        needle.get(proxy.addProxy(decodeURIComponent(parts[0]),{ headers: { referer }}), { headers: { cookie: 'genre=1; tara=US; download=approved' } }, (err, resp, body) => {
-            if (resp && resp.headers && resp.headers.location) {
-                const url = resp.headers.location
-                resolve({ streams: [ { url: proxy.addProxy(url, { headers: { referer } }), title: decodeURIComponent(parts[1].split(':mp3query:')[0]) } ] })
-            } else
-            	reject(defaults.name + ' - Could not get stream for: ' + args.id)
-        })
+        resolve({ streams: [ { url: proxy.addProxy(decodeURIComponent(parts[0]),{ headers: { cookie: 'genre=1; tara=US; download=approved', referer }}), title: decodeURIComponent(parts[1].split(':mp3query:')[0]) } ] })
 	})
 })
 
